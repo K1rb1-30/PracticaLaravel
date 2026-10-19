@@ -3,8 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Escenari extends Model
 {
-    //
+    public function concerts(): HasMany
+    {
+        return $this->hasMany(Concert::class);
+    }
+
 }

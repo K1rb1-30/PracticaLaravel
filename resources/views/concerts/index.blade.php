@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Artistes</title>
+    <title>Concerts</title>
     <style>
         .badge {
             display: inline-block;
@@ -15,7 +15,7 @@
     </style>
 </head>
 <body>
-<h1>Artistes</h1>
+<h1>Concerts</h1>
 
 <p>
     <a href="{{ route('concerts.create') }}">
@@ -30,6 +30,7 @@
         <th>Data i hora</th>
         <th>Tipus</th>
         <th>Durada</th>
+        <th>Escenari</th>
     </tr>
     @foreach($concerts as $concert)
         <tr>
@@ -38,6 +39,7 @@
             <td>{{$concert->data_hora}}</td>
             <td>{{$concert->tipus}}</td>
             <td>{{$concert->durada_minuts }}</td>
+            <td>{{$concert->escenari->nom}}</td>
         </tr>
     @endforeach
 </table>

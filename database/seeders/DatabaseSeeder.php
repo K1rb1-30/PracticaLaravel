@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             ArtistaSeeder::class,
+            EscenariSeeder::class,
             ConcertSeeder::class,
         ]);
     }

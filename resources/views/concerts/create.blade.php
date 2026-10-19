@@ -81,6 +81,21 @@
         <br><span class="error">{{ $message }}</span>
         @enderror
     </p>
+    <p>
+        <label for="escenari_id">Escenari:</label><br>
+        <select id="escenari_id" name="escenari_id">
+            <option value="">-- Selecciona un escenari --</option>
+            @foreach ($escenaris as $escenari)
+                <option value="{{ $escenari->id }}"
+                    {{ old('escenari_id') == $escenari->id ? 'selected' : '' }}>
+                    {{ $escenari->nom }}
+                </option>
+            @endforeach
+        </select>
+        @error('escenari_id')
+        <br><span class="error">{{ $message }}</span>
+        @enderror
+    </p>
 
     <p>
         <button type="submit">Crear</button>

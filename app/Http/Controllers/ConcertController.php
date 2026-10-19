@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Concert;
 use App\Models\Artista;
+use App\Models\Escenari;
 use Illuminate\Http\Request;
 
 class ConcertController extends Controller
@@ -19,7 +20,8 @@ class ConcertController extends Controller
     public function create()
     {
         $artistes = Artista::where('actiu', true)->orderBy('nom')->get();
-        return view('concerts.create', compact('artistes'));
+        $escenaris = Escenari::orderBy('nom')->get();
+        return view('concerts.create', compact('artistes', 'escenaris'));
     }
 
     // POST /artistes — Desar un nou artista

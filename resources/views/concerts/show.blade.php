@@ -10,7 +10,7 @@
 <a href="{{ route('concerts.index') }}">← Tornar a la llista</a>
 <br><br>
 
-
+<h1>Concert</h1>
 <p><strong>ID:</strong> {{ $concert->id }}</p>
 <p><strong>Nom:</strong> {{ $concert->nom }}</p>
 <p><strong>Artista:</strong> {{ $concert->artista->nom }}</p>
@@ -24,6 +24,18 @@
 <p><strong>País:</strong> {{ $concert->artista->pais }}</p>
 <p><strong>Biografia:</strong><br>{{ $concert->artista->bio }}</p>
 
+<br><br>
+<h1>Escenari</h1>
+<p><strong>Nom:</strong> {{ $concert->escenari->nom }}</p>
+<p><strong>Aforament maxim:</strong> {{ $concert->escenari->aforament_maxim }}</p>
+<p><strong>Ubicacio:</strong>{{ $concert->escenari->ubicacio }}</p>
+<p><strong>Cobert:</strong>
+    @if($concert->escenari->cobert)
+        <span class="badge badge-actiu">Cobert</span>
+    @else
+        <span class="badge badge-inactiu">No cobert</span>
+    @endif
+</p>
 
 
 </body>

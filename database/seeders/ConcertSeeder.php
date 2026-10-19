@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Concert;
+use App\Models\Escenari;
 use Illuminate\Database\Seeder;
 
 class ConcertSeeder extends Seeder
@@ -19,6 +20,7 @@ class ConcertSeeder extends Seeder
             'data_hora' => '2026-11-14 23:00:00',
             'durada_minuts' => 110,
             'tipus' => 'CONCERT',
+            'escenari_id' => Escenari::inRandomOrder()->first()->id,
         ]);
 
         Concert::create([
@@ -27,6 +29,7 @@ class ConcertSeeder extends Seeder
             'data_hora' => '2026-11-14 21:00:00',
             'durada_minuts' => 110,
             'tipus' => 'CONCERT',
+            'escenari_id' => Escenari::inRandomOrder()->first()->id,
         ]);
 
         Concert::create([
@@ -35,6 +38,7 @@ class ConcertSeeder extends Seeder
             'data_hora' => '2026-12-05 22:00:00',
             'durada_minuts' => 150,
             'tipus' => 'CONCERT',
+            'escenari_id' => Escenari::inRandomOrder()->first()->id,
         ]);
 
         Concert::create([
@@ -43,6 +47,7 @@ class ConcertSeeder extends Seeder
             'data_hora' => '2026-10-20 20:00:00',
             'durada_minuts' => 60,
             'tipus' => 'SHOWCASE',
+            'escenari_id' => Escenari::inRandomOrder()->first()->id,
         ]);
 
         Concert::create([
@@ -51,6 +56,7 @@ class ConcertSeeder extends Seeder
             'data_hora' => '2026-11-02 23:00:00',
             'durada_minuts' => 90,
             'tipus' => 'DJ_SET',
+            'escenari_id' => Escenari::inRandomOrder()->first()->id,
         ]);
 
         Concert::create([
@@ -59,6 +65,7 @@ class ConcertSeeder extends Seeder
             'data_hora' => '2026-11-28 21:30:00',
             'durada_minuts' => 130,
             'tipus' => 'CONCERT',
+            'escenari_id' => Escenari::inRandomOrder()->first()->id,
         ]);
 
         Concert::create([
@@ -67,6 +74,7 @@ class ConcertSeeder extends Seeder
             'data_hora' => '2026-10-25 19:00:00',
             'durada_minuts' => 45,
             'tipus' => 'ACUSTIC',
+            'escenari_id' => Escenari::inRandomOrder()->first()->id,
         ]);
 
         Concert::create([
@@ -75,6 +83,7 @@ class ConcertSeeder extends Seeder
             'data_hora' => '2026-10-30 19:30:00',
             'durada_minuts' => 50,
             'tipus' => 'ACUSTIC',
+            'escenari_id' => Escenari::inRandomOrder()->first()->id,
         ]);
 
         Concert::create([
@@ -83,6 +92,7 @@ class ConcertSeeder extends Seeder
             'data_hora' => '2026-10-18 23:30:00',
             'durada_minuts' => 80,
             'tipus' => 'DJ_SET',
+            'escenari_id' => Escenari::inRandomOrder()->first()->id,
         ]);
 
         Concert::create([
@@ -91,6 +101,7 @@ class ConcertSeeder extends Seeder
             'data_hora' => '2026-11-10 21:00:00',
             'durada_minuts' => 75,
             'tipus' => 'CONCERT',
+            'escenari_id' => Escenari::inRandomOrder()->first()->id,
         ]);
 
         Concert::create([
@@ -99,6 +110,7 @@ class ConcertSeeder extends Seeder
             'data_hora' => '2026-12-01 20:30:00',
             'durada_minuts' => 55,
             'tipus' => 'SHOWCASE',
+            'escenari_id' => Escenari::inRandomOrder()->first()->id,
         ]);
 
         Concert::create([
@@ -107,7 +119,8 @@ class ConcertSeeder extends Seeder
             'data_hora' => '2026-10-22 19:00:00',
             'durada_minuts' => 40,
             'tipus' => 'ACUSTIC',
-        ]);
+            'escenari_id' => Escenari::inRandomOrder()->first()->id,
+            ]);
 
         Concert::create([
             'nom' => 'Omar Courtz Showcase',
@@ -115,6 +128,7 @@ class ConcertSeeder extends Seeder
             'data_hora' => '2026-11-07 20:00:00',
             'durada_minuts' => 50,
             'tipus' => 'SHOWCASE',
+            'escenari_id' => Escenari::inRandomOrder()->first()->id,
         ]);
     }
 }
