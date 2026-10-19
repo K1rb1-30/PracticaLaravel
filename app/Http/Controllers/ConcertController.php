@@ -27,12 +27,14 @@ class ConcertController extends Controller
     // POST /artistes — Desar un nou artista
     public function store(Request $request)
     {
+        //dd($request);
         $validated = $request->validate([
             'artista_id' => 'required|exists:artistas,id',
             'nom' => 'required|string|max:255',
             'data_hora' => 'required|date',
             'durada_minuts' => 'required|integer|min:15|max:300',
             'tipus' => 'required|in:CONCERT,DJ_SET,SHOWCASE,ACUSTIC',
+            'escenari_id' => 'required',
         ]);
 
         Concert::create($validated);

@@ -86,7 +86,7 @@
         <select id="escenari_id" name="escenari_id">
             <option value="">-- Selecciona un escenari --</option>
             @foreach ($escenaris as $escenari)
-                <option value="{{ $escenari->id }}"
+                <option value="{{ $escenari->id}}"
                     {{ old('escenari_id') == $escenari->id ? 'selected' : '' }}>
                     {{ $escenari->nom }}
                 </option>

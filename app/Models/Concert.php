@@ -14,13 +14,13 @@ class Concert extends Model
         'data_hora',
         'durada_minuts',
         'tipus',
+        'escenari_id',
     ];
     protected $casts = [
         'nom' => 'string',
         'data_hora' => 'datetime',
         'durada_minuts' => 'integer',
         'tipus' => 'string',
-
     ];
 
     public function artista(): BelongsTo

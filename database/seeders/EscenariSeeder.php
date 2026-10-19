@@ -11,6 +11,8 @@ class EscenariSeeder extends Seeder
     /**
      * Run the database seeds.
      */
+
+
     public function run(): void
     {
         Escenari::create(['nom' => 'Escenari Principal', 'aforament_maxim' => 5000, 'ubicacio' => 'Centre del recinte', 'cobert' => false]);
