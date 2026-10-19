@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Artista;
+use App\Models\Genere;
 use Illuminate\Database\Seeder;
 
 class ArtistaSeeder extends Seeder
@@ -84,6 +85,41 @@ class ArtistaSeeder extends Seeder
             'imatge_url' => null,
             'actiu' => false,
         ]);
+
+        // Asignar los generos a cada artista
+        $pop = Genere::where('nom', 'Pop')->first();
+        $trap = Genere::where('nom', 'Trap')->first();
+        $reggaeton = Genere::where('nom', 'Reggaeton')->first();
+        $electro = Genere::where('nom', 'Electro')->first();
+
+        $rosalia = Artista::where('nom', 'Rosalía')->first();
+        $rosalia->generes()->attach([$pop->id, $electro->id]);
+
+        $eladio = Artista::where('nom', 'Eladio Carrión')->first();
+        $eladio->generes()->attach([$trap->id, $reggaeton->id]);
+
+        $badBunny = Artista::where('nom', 'Bad Bunny')->first();
+        $badBunny->generes()->attach([$reggaeton->id, $trap->id, $pop->id]);
+
+        $cano = Artista::where('nom', 'Cano')->first();
+        $cano->generes()->attach([$trap->id]);
+
+        $nengo = Artista::where('nom', 'Ñengo Flow')->first();
+        $nengo->generes()->attach([$reggaeton->id, $trap->id]);
+
+        $rauw = Artista::where('nom', 'Rauw Alejandro')->first();
+        $rauw->generes()->attach([$reggaeton->id, $pop->id, $electro->id]);
+
+        $omar = Artista::where('nom', 'Omar Courtz')->first();
+        $omar->generes()->attach([$trap->id, $reggaeton->id]);
+
+        $planB = Artista::where('nom', 'Plan B')->first();
+        $planB->generes()->attach([$reggaeton->id]);
+
+        $wisinYandel = Artista::where('nom', 'Wisin & Yandel')->first();
+        $wisinYandel->generes()->attach([$reggaeton->id, $pop->id]);
+
+
 
     }
 }
