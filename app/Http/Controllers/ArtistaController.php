@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artista;
+use App\Models\Genere;
 use Illuminate\Http\Request;
 
 class ArtistaController extends Controller
@@ -10,14 +11,15 @@ class ArtistaController extends Controller
     // GET /artistes — Llistar tots els artistes
     public function index()
     {
-        $artistas = Artista::all();
+        $artistas = Artista::with('generes')->orderBy('nom')->get();
         return view('artistas.index', compact('artistas'));
     }
 
     // GET /artistes/create — Mostrar formulari de creació
     public function create()
     {
-        return view('artistas.form');
+        $generes = Genere::all();
+        return view('artistas.form', compact('generes'));
     }
 
     // POST /artistes — Desar un nou artista
@@ -27,10 +29,16 @@ class ArtistaController extends Controller
             'nom' => 'required|string|max:255',
             'pais' => 'required|string|max:100',
             'bio' => 'nullable|string',
+            'imatge_url' => 'nullable|url|max:255',
             'actiu' => 'boolean',
+            'generes' => 'nullable|array|max:6',
+            'generes.*' => 'exists:generes,id',
         ]);
 
-        Artista::create($validated);
+        unset($validated['generes']);
+
+        $artista = Artista::create($validated);
+        $artista->generes()->sync($request->input('generes', []));
 
         return redirect()->route('artistas.index')
             ->with('success', 'Artista creat correctament!');
@@ -45,7 +53,8 @@ class ArtistaController extends Controller
     // GET /artistes/{artista}/edit — Mostrar formulari d'edició
     public function edit(Artista $artista)
     {
-        return view('artistas.form', compact('artista'));
+        $generes = Genere::all();
+        return view('artistas.form', compact('artista', 'generes'));
     }
 
     // PUT /artistes/{artista} — Actualitzar un artista
@@ -57,9 +66,14 @@ class ArtistaController extends Controller
             'bio' => 'nullable|string',
             'imatge_url' => 'nullable|url|max:255',
             'actiu' => 'boolean',
+            'generes' => 'nullable|array|max:6',
+            'generes.*' => 'exists:generes,id',
         ]);
 
+        unset($validated['generes']);
+
         $artista->update($validated);
+        $artista->generes()->sync($request->input('generes', []));
 
         return redirect()->route('artistas.index')
             ->with('success', 'Artista actualitzat correctament!');

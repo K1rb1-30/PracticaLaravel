@@ -23,4 +23,11 @@ class Artista extends Model
     {
         return $this->hasMany(Concert::class);
     }
+
+    public function generes(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Genere::class);
+    }
+
+
 }

@@ -45,7 +45,7 @@
 
     <p>
         <label>URL de la imagen:</label><br>
-        <input type="text" name="url" value="{{ old('url', $artista->url ?? '') }}">
+        <input type="text" name="imatge_url" value="{{ old('url', $artista->url ?? '') }}">
         @error('url')
         <br><span class="error">{{ $message }}</span>
         @enderror
@@ -61,6 +61,27 @@
         </label>
         @error('actiu')
         <br><span class="error">{{ $message }}</span>
+        @enderror
+    </p>
+
+    @php
+        $seleccionats = old('generes', isset($artista) ? $artista->generes->pluck('id')->all() : []);
+    @endphp
+
+    <p>
+        <label>Gèneres:</label><br>
+        @foreach($generes as $genere)
+            <label>
+                <input type="checkbox" name="generes[]" value="{{ $genere->id }}"
+                    @checked(in_array($genere->id, $seleccionats))>
+                {{ $genere->nom }}
+            </label><br>
+        @endforeach
+        @error('generes')
+        <span class="error">{{ $message }}</span><br>
+        @enderror
+        @error('generes.*')
+        <span class="error">{{ $message }}</span>
         @enderror
     </p>
 
