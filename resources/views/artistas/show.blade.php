@@ -20,6 +20,18 @@
 <p><strong>Nom:</strong> {{ $artista->nom }}</p>
 <p><strong>País:</strong> {{ $artista->pais }}</p>
 <p><strong>Actiu:</strong> {{ $artista->actiu ? 'Actiu' : 'Inactiu' }}</p>
+
+<p><strong>Gèneres:</strong></p>
+@if ($artista->generes->count() > 0)
+    <ul>
+        @foreach ($artista->generes as $genere)
+            <li>{{ $genere->nom }}</li>
+        @endforeach
+    </ul>
+@else
+    <p>Aquest artista no té gèneres assignats.</p>
+@endif
+
 <p><strong>Biografia:</strong><br>{{ $artista->bio }}</p>
 <p><strong>Imatge URL:</strong> {{ $artista->imatge_url }}</p>
 <br><br>
