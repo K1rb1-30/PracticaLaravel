@@ -29,6 +29,7 @@
         <th>País</th>
         <th>Actiu</th>
         <th>Accions</th>
+        <th>Generes</th>
     </tr>
     @foreach($artistas as $artista)
         <tr>
@@ -45,6 +46,7 @@
                 <a href="{{ route('artistas.show', $artista->id) }}">Show</a> |
                 <a href="{{ route('artistas.edit', $artista->id) }}">Edit</a>
             </td>
+            <td></td>
         </tr>
     @endforeach
 </table>
