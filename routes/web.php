@@ -21,6 +21,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+Route::middleware('auth')->group(function () {
+    //meter aqui lo de abajo para que sea obligatorio tener usuario
+});
+
 Route::resource('artistas', ArtistaController::class);
 
 Route::get('/artistas', [ArtistaController::class, 'index'])->name('artistas.index');
@@ -35,4 +39,3 @@ Route::get('/concerts', [ConcertController::class, 'index'])->name('concerts.ind
 Route::get('/concerts/create', [ConcertController::class, 'create'])->name('concerts.create');
 Route::post('/concerts', [ConcertController::class, 'store'])->name('concerts.store');
 Route::get('/concerts/{concert}', [ConcertController::class, 'show'])->name('concerts.show');
-
