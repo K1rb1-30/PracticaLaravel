@@ -12,6 +12,7 @@
         }
         .badge-actiu { background-color: #28a745; }
         .badge-inactiu { background-color: #6c757d; }
+        .badge-genere { background-color: #007bff; margin-right: 4px; }
     </style>
 </head>
 <body>
@@ -29,6 +30,7 @@
         <th>País</th>
         <th>Actiu</th>
         <th>Accions</th>
+        <th>Generes</th>
     </tr>
     @foreach($artistas as $artista)
         <tr>
@@ -44,6 +46,11 @@
             <td>
                 <a href="{{ route('artistas.show', $artista->id) }}">Show</a> |
                 <a href="{{ route('artistas.edit', $artista->id) }}">Edit</a>
+            </td>
+            <td>
+                @foreach($artista->generes as $genere)
+                    <span class="badge badge-genere">{{ $genere->nom }}</span>
+                @endforeach
             </td>
         </tr>
     @endforeach
