@@ -12,6 +12,6 @@ class EntradaSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+
     }
 }

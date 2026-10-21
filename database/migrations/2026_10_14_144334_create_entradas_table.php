@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('entradas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('concert_id')->constrained('concerts')->onDelete('cascade');
-            $table->integer("preu");
+            $table->decimal("preu_pagat",8,2);
+            $table->string("codi_entrada")->unique();
             $table->timestamps();
         });
     }

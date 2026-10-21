@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EntradaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtistaController;
@@ -37,6 +38,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/concerts/create', [ConcertController::class, 'create'])->name('concerts.create');
     Route::post('/concerts', [ConcertController::class, 'store'])->name('concerts.store');
     Route::get('/concerts/{concert}', [ConcertController::class, 'show'])->name('concerts.show');
+
+
+
+    Route::get('/entrades', [EntradaController::class, 'mevesentradas'])->name('entrades.meves');
+    Route::get('/concerts/{concert}/comprar', [EntradaController::class, 'create'])->name('entradas.create');
+    Route::post('/concerts/{concert}/comprar', [EntradaController::class, 'store'])->name('entradas.store');
+    Route::get('/concerts/{concert}/assistents', [EntradaController::class, 'assistents'])->name('entradas.assistents');
+
 
 });
 
