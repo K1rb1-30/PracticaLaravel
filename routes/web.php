@@ -23,19 +23,20 @@ require __DIR__.'/auth.php';
 
 Route::middleware('auth')->group(function () {
     //meter aqui lo de abajo para que sea obligatorio tener usuario
+    Route::resource('artistas', ArtistaController::class);
+
+    Route::get('/artistas', [ArtistaController::class, 'index'])->name('artistas.index');
+    Route::get('/artistas/create', [ArtistaController::class, 'create'])->name('artistas.create');
+    Route::post('/artistas', [ArtistaController::class, 'store'])->name('artistas.store');
+    Route::get('/artistas/{artista}', [ArtistaController::class, 'show'])->name('artistas.show');
+    Route::get('/artistas/{artista}/edit', [ArtistaController::class, 'edit'])->name('artistas.edit');
+    Route::put('/artistas/{artista}', [ArtistaController::class, 'update'])->name('artistas.update');
+
+
+    Route::get('/concerts', [ConcertController::class, 'index'])->name('concerts.index');
+    Route::get('/concerts/create', [ConcertController::class, 'create'])->name('concerts.create');
+    Route::post('/concerts', [ConcertController::class, 'store'])->name('concerts.store');
+    Route::get('/concerts/{concert}', [ConcertController::class, 'show'])->name('concerts.show');
+
 });
 
-Route::resource('artistas', ArtistaController::class);
-
-Route::get('/artistas', [ArtistaController::class, 'index'])->name('artistas.index');
-Route::get('/artistas/create', [ArtistaController::class, 'create'])->name('artistas.create');
-Route::post('/artistas', [ArtistaController::class, 'store'])->name('artistas.store');
-Route::get('/artistas/{artista}', [ArtistaController::class, 'show'])->name('artistas.show');
-Route::get('/artistas/{artista}/edit', [ArtistaController::class, 'edit'])->name('artistas.edit');
-Route::put('/artistas/{artista}', [ArtistaController::class, 'update'])->name('artistas.update');
-
-
-Route::get('/concerts', [ConcertController::class, 'index'])->name('concerts.index');
-Route::get('/concerts/create', [ConcertController::class, 'create'])->name('concerts.create');
-Route::post('/concerts', [ConcertController::class, 'store'])->name('concerts.store');
-Route::get('/concerts/{concert}', [ConcertController::class, 'show'])->name('concerts.show');
