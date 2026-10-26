@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('artista_id')->constrained('artistas')->onDelete('cascade');
             $table->foreignId('genere_id')->constrained('generes')->onDelete('cascade');
-
+            $table->primary(['artista_id', 'genere_id']);
             $table->timestamps();
         });
     }

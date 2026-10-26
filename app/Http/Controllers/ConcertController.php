@@ -12,7 +12,7 @@ class ConcertController extends Controller
     //
     public function index(){
         //ordena por fecha
-        $concerts = Concert::with('artista')->orderBy('data_hora')->get();
+        $concerts = Concert::with(['artista','escenari'])->orderBy('data_hora')->get();
         return view('concerts.index', compact('concerts'));
     }
 
@@ -34,7 +34,7 @@ class ConcertController extends Controller
             'data_hora' => 'required|date',
             'durada_minuts' => 'required|integer|min:15|max:300',
             'tipus' => 'required|in:CONCERT,DJ_SET,SHOWCASE,ACUSTIC',
-            'escenari_id' => 'required',
+            'escenari_id' => 'required|exists:escenaris,id',
         ]);
 
         Concert::create($validated);
