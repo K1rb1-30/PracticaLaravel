@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
 
 
 
-    Route::get('/entrades', [EntradaController::class, 'mevesentradas'])->name('entrada.meves');
+    Route::get('/entradas', [EntradaController::class, 'mevesentradas'])->name('entradas.meves');
     Route::get('/concerts/{concert}/comprar', [EntradaController::class, 'create'])->name('entradas.create');
     Route::post('/concerts/{concert}/comprar', [EntradaController::class, 'store'])->name('entradas.store');
     Route::get('/concerts/{concert}/assistents', [EntradaController::class, 'assistents'])->name('entradas.assistents');

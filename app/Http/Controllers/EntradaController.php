@@ -14,8 +14,14 @@ class EntradaController extends Controller
     {
         //confiamos en que funciona
         $id_user = auth()->id();
-        $entradas = Entrada::where('user_id', $id_user)->get();
-        return view('entrada.meves', compact('entradas'));
+
+        $entradas = Entrada::where('user_id', $id_user)
+            ->with('concert.artista')
+            ->get();
+
+        $entradas = $entradas->sortBy('concert.data_hora');
+
+        return view('entradas.meves', compact('entradas'));
     }
     public function create(Concert $concert)
     {
@@ -24,21 +30,19 @@ class EntradaController extends Controller
     public function store(Request $request, Concert $concert): RedirectResponse
     {
         // tiene sentido en la cabeza del marc
-
-        $entrada = Entrada::create([
+        $request->validate(['preu_pagat' => 'required|numeric|min:0']);
+        Entrada::create([
             'concert_id' => $concert->id,
             'user_id' => auth()->id(),
             'preu_pagat' => $request->preu_pagat,
         ]);
 
-        $entrada->save();
-
-        return redirect()->route('entrada.meves')->with('success', 'Entrada comprada!');
+        return redirect()->route('entradas.meves')->with('success', 'Entrada comprada!');
     }
 
     public function assistents(Concert $concert): View
     {
         $concert->load('entradas.user', 'escenari');
-        return view('concerts.index', compact('concert'));
+        return view('entradas.assistents', compact('concert'));
     }
 }
