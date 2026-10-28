@@ -13,6 +13,9 @@
 
 {{-- Comptador: entrades venudes / aforament de l'escenari --}}
 <p><strong>{{ $concert->entradas->count() }} / {{ $concert->escenari->aforament_maxim }} entrades venudes</strong></p>
+@if ($concert->entradas->count() >= $concert->escenari->aforament_maxim)
+    <p><strong>Esgotades</strong></p>
+@endif
 
 @if ($concert->entradas->isEmpty())
     <p>Encara no hi ha assistents.</p>

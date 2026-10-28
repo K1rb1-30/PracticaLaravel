@@ -18,6 +18,10 @@
 <p><strong>Data:</strong> {{ $concert->data_hora->format('d/m/Y H:i') }}</p>
 <p><strong>Escenari:</strong> {{ $concert->escenari->nom }}</p>
 
+@error('aforament')
+<p class="error">{{ $message }}</p>
+@enderror
+
 <form action="{{ route('entradas.store', $concert->id) }}" method="POST">
     @csrf
 
