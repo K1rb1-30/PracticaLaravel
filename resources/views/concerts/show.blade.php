@@ -37,6 +37,15 @@
     @endif
 </p>
 
+<br><br>
+<h1>Entrades</h1>
+<p><strong>Entrades venudes:</strong> {{ $concert->entradas->count() }}</p>
+<p>
+    <a href="{{ route('entradas.create', $concert->id) }}">
+        <button type="button">Comprar entrada</button>
+    </a>
+</p>
+<p><a href="{{ route('entradas.assistents', $concert->id) }}">Veure assistents</a></p>
 
 </body>
 </html>

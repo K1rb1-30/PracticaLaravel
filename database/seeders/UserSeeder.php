@@ -26,6 +26,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('1234'),
         ]);
         // Crear usuaris amb dades generades per Faker
-        // User::factory(20)->create();
+        User::factory(5)->create();
     }
 }
