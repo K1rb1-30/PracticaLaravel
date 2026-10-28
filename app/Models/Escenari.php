@@ -12,4 +12,9 @@ class Escenari extends Model
         return $this->hasMany(Concert::class);
     }
 
+    public function entradas(): HasMany
+    {
+        return $this->hasManyThrough(Entrada::class,Concert::class);
+    }
+
 }
