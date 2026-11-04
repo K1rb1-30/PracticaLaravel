@@ -31,10 +31,23 @@ class EstadisticaController extends Controller
             ->orderBy('COUNT(entradas.id)')
             ->get();
 
-        $countEntradas =
+        $escenaris = Escenari::withCount(['concerts', 'entradas'])->get();
 
-        //$ocupacioEscenari = Escenari::
 
-        return view('estadisticas.index', compact('top5concert', 'top5artistas', 'recapEscenari', 'generesPopulars'));
+        $ocupacioEscenari = $escenaris->map(function ($escenari) {
+            $aforamentTotal = $escenari->aforament_maxim * $escenari->concerts_count;
+
+            if ($aforamentTotal == 0) {
+                $ocupacio = 0;
+            } else {
+                $ocupacio = round($escenari->entradas_count / $aforamentTotal * 100, 2);
+            }
+
+            $escenari->ocupacio = $ocupacio;
+
+            return $escenari;
+        });
+
+        return view('estadisticas.index', compact('top5concert', 'top5artistas', 'recapEscenari', 'generesPopulars', 'ocupacioEscenari'));
     }
 }
