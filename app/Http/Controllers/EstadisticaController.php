@@ -12,7 +12,7 @@ class EstadisticaController extends Controller
 {
     //
     public function index(){
-        $top5concert = Concert::withCount('entradas')
+        $top5concert = Concert::with('artista')->withCount('entradas')
             ->orderBy('entradas_count', 'desc')
             ->limit(5)->get();
 
@@ -23,30 +23,23 @@ class EstadisticaController extends Controller
         $recapEscenari = Escenari::withSum('entradas', 'preu_pagat')
             ->get();
 
-        $generesPopulars = Genere::join('artistas_genere', 'genere.id', '=', 'artistas_genere.genere_id')
-            ->join('artistas', 'artistas_genere.artista_id', '=', 'artistas.id')
+        $generesPopulars = Genere::join('artista_genere', 'generes.id', '=', 'artista_genere.genere_id')
+            ->join('artistas', 'artista_genere.artista_id', '=', 'artistas.id')
             ->join('concerts', 'artistas.id', '=', 'concerts.artista_id')
             ->join('entradas', 'concerts.id', '=', 'entradas.concert_id')
+            ->selectRaw('generes.id, generes.nom, COUNT(entradas.id) as total_entrades')
             ->groupBy('generes.id', 'generes.nom')
-            ->orderBy('COUNT(entradas.id)')
+            ->orderByDesc('total_entrades')
             ->get();
 
-        $escenaris = Escenari::withCount(['concerts', 'entradas'])->get();
-
-
-        $ocupacioEscenari = $escenaris->map(function ($escenari) {
-            $aforamentTotal = $escenari->aforament_maxim * $escenari->concerts_count;
-
-            if ($aforamentTotal == 0) {
-                $ocupacio = 0;
-            } else {
-                $ocupacio = round($escenari->entradas_count / $aforamentTotal * 100, 2);
-            }
-
-            $escenari->ocupacio = $ocupacio;
-
-            return $escenari;
-        });
+        $ocupacioEscenari = Escenari::leftJoin('concerts', 'escenaris.id', '=', 'concerts.escenari_id')
+            ->leftJoin('entradas', 'concerts.id', '=', 'entradas.concert_id')
+            ->selectRaw('escenaris.nom, escenaris.aforament_maxim,
+                COUNT(DISTINCT concerts.id) as concerts_count,
+                COUNT(entradas.id) as entradas_count,
+                ROUND(COUNT(entradas.id) / NULLIF(escenaris.aforament_maxim * COUNT(DISTINCT concerts.id), 0) * 100, 2) as ocupacio')
+            ->groupBy('escenaris.id', 'escenaris.nom', 'escenaris.aforament_maxim')
+            ->get();
 
         return view('estadisticas.index', compact('top5concert', 'top5artistas', 'recapEscenari', 'generesPopulars', 'ocupacioEscenari'));
     }

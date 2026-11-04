@@ -24,8 +24,8 @@
             <table >
                 <thead><tr><th>Concert</th><th>Artista</th><th>Entrades</th></tr></thead>
                 <tbody>
-                @foreach($topConcerts as $c)
-                    <tr><td>{{ $c->nom }}</td><td>{{ $c->artista->nom }}</td><td>{{ $c->entrades_count }}</td></tr>
+                @foreach($top5concert as $c)
+                    <tr><td>{{ $c->nom }}</td><td>{{ $c->artista->nom }}</td><td>{{ $c->entradas_count }}</td></tr>
                 @endforeach
                 </tbody>
             </table>
@@ -36,7 +36,7 @@
             <table >
                 <thead><tr><th>Artista</th><th>Concerts</th></tr></thead>
                 <tbody>
-                @foreach($topArtistes as $a)
+                @foreach($top5artistas as $a)
                     <tr><td>{{ $a->nom }}</td><td>{{ $a->concerts_count }}</td></tr>
                 @endforeach
                 </tbody>
@@ -48,8 +48,8 @@
             <table >
                 <thead><tr><th>Escenari</th><th>Total</th></tr></thead>
                 <tbody>
-                @foreach($recaptacio as $e)
-                    <tr><td>{{ $e->nom }}</td><td>{{ number_format($e->entrades_sum_preu_pagat ?? 0, 2) }} €</td></tr>
+                @foreach($recapEscenari as $e)
+                    <tr><td>{{ $e->nom }}</td><td>{{ number_format($e->entradas_sum_preu_pagat ?? 0, 2) }} €</td></tr>
                 @endforeach
                 </tbody>
             </table>
@@ -72,13 +72,13 @@
             <table>
                 <thead><tr><th>Escenari</th><th>Aforament</th><th>Concerts</th><th>Entrades</th><th>Ocupació</th></tr></thead>
                 <tbody>
-                @foreach($ocupacio as $o)
+                @foreach($ocupacioEscenari as $o)
                     <tr>
                         <td>{{ $o->nom }}</td>
                         <td>{{ $o->aforament_maxim }}</td>
-                        <td>{{ $o->total_concerts }}</td>
-                        <td>{{ $o->total_entrades }}</td>
-                        <td>{{ $o->ocupacio }} %</td>
+                        <td>{{ $o->concerts_count }}</td>
+                        <td>{{ $o->entradas_count }}</td>
+                        <td>{{ $o->ocupacio ?? 0 }} %</td>
                     </tr>
                 @endforeach
                 </tbody>

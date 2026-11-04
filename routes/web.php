@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/concerts/{concert}/comprar', [EntradaController::class, 'store'])->name('entradas.store');
     Route::get('/concerts/{concert}/assistents', [EntradaController::class, 'assistents'])->name('entradas.assistents');
 
-    Route::get('/estadisticas', [EstadisticaController::class, 'index'])->name('estadisticas.index');
+    Route::get('/estadistiques', [EstadisticaController::class, 'index'])->name('estadisticas.index');
 
 });
 
