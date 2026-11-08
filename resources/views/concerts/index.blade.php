@@ -23,6 +23,38 @@
     </a>
 </p>
 
+{{-- Filtres (GET: només consultem, no guardem res) --}}
+<form action="{{ route('concerts.index') }}" method="GET">
+    <label>Escenari:</label>
+    <select name="escenari_id">
+        <option value="">Tots</option>
+        @foreach ($escenaris as $escenari)
+            <option value="{{ $escenari->id }}" @selected(request('escenari_id') == $escenari->id)>
+                {{ $escenari->nom }}
+            </option>
+        @endforeach
+    </select>
+
+    <label>Gènere:</label>
+    <select name="genere_id">
+        <option value="">Tots</option>
+        @foreach ($generes as $genere)
+            <option value="{{ $genere->id }}" @selected(request('genere_id') == $genere->id)>
+                {{ $genere->nom }}
+            </option>
+        @endforeach
+    </select>
+
+    <label>Des de:</label>
+    <input type="date" name="data_inici" value="{{ request('data_inici') }}">
+
+    <label>Fins a:</label>
+    <input type="date" name="data_fi" value="{{ request('data_fi') }}">
+
+    <button type="submit">Filtrar</button>
+</form>
+<br>
+
 <table border="1">
     <tr>
         <th>Nom</th>
