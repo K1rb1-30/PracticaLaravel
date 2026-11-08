@@ -5,15 +5,40 @@ namespace App\Http\Controllers;
 use App\Models\Concert;
 use App\Models\Artista;
 use App\Models\Escenari;
+use App\Models\Genere;
 use Illuminate\Http\Request;
 
 class ConcertController extends Controller
 {
     //
-    public function index(){
-        //ordena por fecha
-        $concerts = Concert::with(['artista','escenari'])->orderBy('data_hora')->get();
-        return view('concerts.index', compact('concerts'));
+    public function index(Request $request){
+        $query = Concert::with(['artista','escenari']);
+
+        if ($request->filled('escenari_id')) {
+            $query->where('escenari_id', $request->escenari_id);
+        }
+
+        if ($request->filled('data_inici')) {
+            $query->whereDate('data_hora', '>=', $request->data_inici);
+        }
+
+        if ($request->filled('data_fi')) {
+            $query->whereDate('data_hora', '<=', $request->data_fi);
+        }
+
+
+        if ($request->filled('genere_id')) {
+            $query->whereHas('artista.generes', function ($q) use ($request) {
+                $q->where('generes.id', $request->genere_id);
+            });
+        }
+
+        $concerts = $query->orderBy('data_hora')->get();
+
+        $escenaris = Escenari::orderBy('nom')->get();
+        $generes = Genere::orderBy('nom')->get();
+
+        return view('concerts.index', compact('concerts', 'escenaris', 'generes'));
     }
 
     // GET /artistes/create — Mostrar formulari de creació

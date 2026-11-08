@@ -31,6 +31,11 @@ class EntradaController extends Controller
     {
         // tiene sentido en la cabeza del marc
         $request->validate(['preu_pagat' => 'required|numeric|min:0']);
+
+        if ($concert->entradas()->count() >= $concert->escenari->aforament_maxim) {
+            return back()->withErrors(['aforament' => 'Aquest concert està ple.']);
+        }
+
         Entrada::create([
             'concert_id' => $concert->id,
             'user_id' => auth()->id(),

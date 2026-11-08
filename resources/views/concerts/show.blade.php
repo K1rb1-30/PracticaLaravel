@@ -42,7 +42,9 @@
 <p><strong>Entrades venudes:</strong> {{ $concert->entradas->count() }}</p>
 <p>
     <a href="{{ route('entradas.create', $concert->id) }}">
-        <button type="button">Comprar entrada</button>
+        <button type="button" @disabled($concert->entradas->count() >= $concert->escenari->aforament_maxim)>
+            Comprar entrada
+        </button>
     </a>
 </p>
 <p><a href="{{ route('entradas.assistents', $concert->id) }}">Veure assistents</a></p>
